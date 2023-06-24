@@ -1,18 +1,23 @@
 <?php
 
+// Laravelのルーティングはweb.phpに記述します
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// ルートページ（'/'）へのアクセスをArticleControllerのindexメソッドにマッピング
+Route::get('/', [ArticleController::class, 'index'])->name('index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// 記事の詳細ページへのアクセスをArticleControllerのdetailメソッドにマッピング
+Route::get('/{article}', [ArticleController::class, 'detail'])->name('detail');
+
+// 記事の削除に関するルートをArticleControllerのdeleteメソッドにマッピング
+Route::delete('/{article}/delete', [ArticleController::class, 'delete'])->name('delete');
+
+// 記事の更新に関するルートをArticleControllerのupdateメソッドにマッピング
+Route::put('/{article}/update', [ArticleController::class, 'update'])->name('update');
+
+// いいね機能に関するルートをArticleControllerのlikeメソッドにマッピング
+Route::post('/{article}/like', [ArticleController::class, 'like'])->name('like');
+
+// APIのルートも定義します。ここではapi/articles/{article}/likeへのアクセスをArticleControllerのapi_likeメソッドにマッピング
+Route::post('api/articles/{article}/like', [ArticleController::class, 'api_like']);
