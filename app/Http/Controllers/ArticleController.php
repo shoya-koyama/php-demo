@@ -86,4 +86,31 @@ class ArticleController extends Controller
 
         return Response::json(['id' => $article_id, 'like' => $article->like]);
     }
+    public function edit($id)
+    {
+        $article = Article::find($id);  // IDで記事を検索
+
+        return view('edit_article', ['article' => $article]);  // ビューを表示
+    }
+    public function show($id)
+    {
+        $article = Article::find($id);  // IDで記事を検索
+
+        // 関連するコメントを検索 (この部分はあなたのデータベース設計によります)
+        $comments = Comment::where('article_id', $id)->get();
+
+        return view('detail_article', ['article' => $article, 'comments' => $comments]);  // ビューを表示
+    }
+    
+
+    public function store(Request $request)
+    {
+        $article = new Article;  // 新しい記事を作成
+        $article->title = $request->title;  // タイトルを設定
+        $article->body = $request->text;  // 本文を設定
+        $article->posted_at = now();  // 投稿日時を設定
+        $article->save();  // 保存
+
+        return redirect()->route('index');  // 一覧ページにリダイレクト
+    }
 }
