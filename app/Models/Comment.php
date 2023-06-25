@@ -1,7 +1,7 @@
 <?php
 
 // 呼び出す名前空間を定義
-namespace App;
+namespace App\Models;
 
 // 必要なクラスをインポート
 use Illuminate\Database\Eloquent\Model;

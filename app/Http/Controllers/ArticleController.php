@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use app\Models\Article;
-use app\Models\Comment;
-use Redirect;
-use Response;
+use App\Models\Article;
+use App\Models\Comment;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 class ArticleController extends Controller
 {
